@@ -1,0 +1,28 @@
+
+p "ok" $ stack
+  [ dRelease5 80
+  , dAttack5  80
+  ] & drum
+
+
+d2 $ stack
+  [ s "in1" & room 0.6 & size 0.4 & orbit 1 & lpf 2000
+  , stack
+      [ n "0 ~"
+      , n "~ 2"
+      , n "[4*5 ~] 4*2 ~ 4*5 [4 4*10]"
+      , n "~ ~ 5*2 ~ ~"
+      , n "~ ~ 7 ~"
+      , n "~ [~ 9 9]" & drum
+      ] & drum
+  -- , dTune "<0 127>" & drum
+  , dPitch5 "<106 53 46 43 28 35 32>" & drum
+  , dPitch6 "<106 53 46 43 28 35 32>" & drum
+  ]
+
+
+d1 $ slow 8 $ rev $ s "bev"
+  & speed (-0.5)
+  & gain 1.5
+
+d1 silence
