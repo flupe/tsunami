@@ -84,6 +84,17 @@ dDecay    = param 117
 dBody     = param 118
 dTune     = param 119
 
+dp :: Pattern Int -> ControlPattern
+dp = n . (drumN <$>)
+  where
+    drumN 1 = 0
+    drumN 2 = 2
+    drumN 3 = 4
+    drumN 4 = 5
+    drumN 5 = 7
+    drumN 6 = 9
+    drumN _ = 0
+
 -- volca nubass helpers
 nubass = midi 1
 
