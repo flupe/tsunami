@@ -1,0 +1,24 @@
+-- using volca drum on in1
+
+dr :: Pattern Int -> ControlPattern
+dr = n . (drumN <$>)
+  where
+    drumN 1 = 0
+    drumN 2 = 2
+    drumN 3 = 4
+    drumN 4 = 5
+    drumN 5 = 7
+    drumN 6 = 9
+    drumN _ = 0
+
+d1 $ stack
+  [ dr "1 [3*2, [~ 4*2]!2]"   & drum
+  , (0.125 ~>) $ dr "2 [2 2]" & drum
+  , (0.625 ~>) $ dr "6*16" & dPitch6 "<45 53 62 41>" & drum
+  , (0.125 ~>) $ dr "5" & dPitch5 "<45 53 62 41>" & drum
+  , dPitch1 "<0 <54 41 38>>" & drum
+  , s "in1"
+    & room 0.8
+    & size 0.9
+    & orbit 0
+  ]
