@@ -1,28 +1,40 @@
 <!DOCTYPE patchbay>
-<patchbay name="patchbay" version="0.6.3">
+<patchbay version="0.6.3" name="patchbay">
  <output-sockets>
-  <socket name="UMC404HD 192k 1" type="alsa-midi" client="UMC404HD 192k" exclusive="off">
+  <socket type="jack-audio" exclusive="off" name="PulseAudio JACK Sink" client="PulseAudio JACK Sink">
+   <plug>front-left</plug>
+   <plug>front-right</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" name="UMC404HD 192k 1" client="UMC404HD 192k">
    <plug>UMC404HD 192k MIDI 1</plug>
   </socket>
-  <socket name="SuperCollider MIDI OUT" type="alsa-midi" client="SuperCollider" exclusive="off">
+  <socket type="alsa-midi" exclusive="off" name="SuperCollider MIDI OUT" client="SuperCollider">
    <plug>out0</plug>
   </socket>
-  <socket name="SuperCollider Audio" type="jack-audio" client="SuperCollider" exclusive="off">
+  <socket type="jack-audio" exclusive="off" name="SuperCollider Audio" client="SuperCollider">
    <plug>out_1</plug>
    <plug>out_2</plug>
   </socket>
-  <socket name="USB Oxygen 8 v 1" type="alsa-midi" client="USB Oxygen 8 v2" exclusive="off">
+  <socket type="alsa-midi" exclusive="off" name="USB Oxygen 8 v 1" client="USB Oxygen 8 v2">
    <plug>USB Oxygen 8 v2 MIDI 1</plug>
   </socket>
  </output-sockets>
  <input-sockets>
-  <socket name="UMC404HD 192k 1" type="alsa-midi" client="UMC404HD 192k" exclusive="off">
+  <socket type="jack-audio" exclusive="on" name="PulseAudio JACK Source" client="PulseAudio JACK Source">
+   <plug>front-left</plug>
+   <plug>front-right</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" name="system 1" client="system">
+   <plug>playback_1</plug>
+   <plug>playback_2</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" name="UMC404HD 192k 1" client="UMC404HD 192k">
    <plug>UMC404HD 192k MIDI 1</plug>
   </socket>
-  <socket name="SuperCollider MIDI IN" type="alsa-midi" client="SuperCollider" exclusive="off">
+  <socket type="alsa-midi" exclusive="off" name="SuperCollider MIDI IN" client="SuperCollider">
    <plug>in0</plug>
   </socket>
-  <socket name="OBS Jack Input Client" type="jack-audio" client="JACK Input Client" exclusive="off">
+  <socket type="jack-audio" exclusive="off" name="OBS Jack Input Client" client="JACK Input Client">
    <plug>in_1</plug>
    <plug>in_2</plug>
   </socket>
@@ -31,7 +43,10 @@
  <cables>
   <cable input="UMC404HD 192k 1" type="alsa-midi" output="SuperCollider MIDI OUT"/>
   <cable input="OBS Jack Input Client" type="jack-audio" output="SuperCollider Audio"/>
+  <cable input="PulseAudio JACK Source" type="jack-audio" output="SuperCollider Audio"/>
+  <cable input="system 1" type="jack-audio" output="SuperCollider Audio"/>
   <cable input="SuperCollider MIDI IN" type="alsa-midi" output="USB Oxygen 8 v 1"/>
+  <cable input="system 1" type="jack-audio" output="PulseAudio JACK Sink"/>
  </cables>
 </patchbay>
 
