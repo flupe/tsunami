@@ -85,7 +85,7 @@ dBody     = param 118
 dTune     = param 119
 
 dp :: Pattern Int -> ControlPattern
-dp = n . (drumN <$>)
+dp = n . fmap drumN
   where
     drumN 1 = 0
     drumN 2 = 2
